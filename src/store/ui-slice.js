@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 /**
- * slice to handle the cart button found in the header,
+ * slice to handle the show cart button found in the header,
  * defaults to false and upon toggle reverts to opposite of previous stored state
  */
 
