@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
@@ -23,20 +23,23 @@ function App() {
   // collects the notification state from ui-slice, defaults to null
   const notification = useSelector((state) => state.ui.notification);
 
-  // calls the fetchCartData function found in cart-actions.js
+  // calls the fetchCartData function found in cart-actions.js, this returns a 'cart' object
   useEffect(() => {
     dispatch(fetchCartData());
   }, [dispatch]);
 
   // determines if page has undergone initial render or not.
-  // calls the sendCartData function in cart-slice.js, passing it the cart object.
+  // then uses the 'changed' field in cart-slice to determine if the front & back end cart data match
+  // if no match, calls the sendCartData function in cart-slice.js, passing it the new cart object.
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
 
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
 
   /**
