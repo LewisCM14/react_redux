@@ -70,7 +70,7 @@ const cartSlice = createSlice({
    * else displays the error notification
    */
 
-const sendCartData = (cart) => {
+ export const sendCartData = (cart) => {
   return async (dispatch) => {
     dispatch(
       uiActions.showNotification({
